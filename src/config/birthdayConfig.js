@@ -33,7 +33,7 @@ export const birthdayConfig = {
     },
     {
       id: 2,
-      image: "/images/memory-2.jpg",
+      image: "/images/memory-2.jpeg",
       date: "Coffee & Conversations",
       title: "Laughing Till Late",
       caption: "Your laugh is honestly my favorite sound in the whole world."
@@ -86,14 +86,14 @@ export const birthdayConfig = {
       date: "Precious Moments",
       title: "Forever Smiling",
       caption: "Every single day with you is my favorite memory in the making."
-    },
-    {
-      id: 10,
-      image: "/images/memory-10.jpg",
-      date: "Infinite Love",
-      title: "My Whole World",
-      caption: "You are the sweetest part of my life, today and for all my tomorrows."
     }
+    // {
+    //   id: 10,
+    //   image: "/images/memory-10.jpg",
+    //   date: "Infinite Love",
+    //   title: "My Whole World",
+    //   caption: "You are the sweetest part of my life, today and for all my tomorrows."
+    // }
   ],
 
   // ------------------------------------------------------------------
@@ -105,7 +105,7 @@ export const birthdayConfig = {
       date: "The First Moment",
       title: "Then We Met…",
       description: "It started with a single conversation that felt like catching up with someone I've known forever.",
-      image: "/images/story-1.jpg"
+      image: "/images/story-1.jpeg"
     },
     {
       id: "m2",
@@ -126,7 +126,7 @@ export const birthdayConfig = {
       date: "The Realization",
       title: "I Didn't Just Want Memories…",
       description: "And somewhere along the way, I realized I didn't just want moments with you — I wanted a lifetime of them.",
-      image: "/images/story-4.jpeg"
+      image: "/images/story-4.jpg"
     },
     {
       id: "m5",
