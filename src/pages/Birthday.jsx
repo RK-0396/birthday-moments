@@ -16,10 +16,15 @@ import { MusicPlayer } from '../components/MusicPlayer';
 export const BirthdayPage = () => {
   const [showOpening, setShowOpening] = useState(true);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
+  
+  // Set to true whenever you want to show the music player again!
+  const showMusicPlayer = false;
 
   const handleStartExperience = () => {
     setShowOpening(false);
-    setIsPlayingMusic(true);
+    if (showMusicPlayer) {
+      setIsPlayingMusic(true);
+    }
   };
 
   const toggleMusic = () => {
@@ -35,11 +40,11 @@ export const BirthdayPage = () => {
       {showOpening && <OpeningSurprise onOpen={handleStartExperience} />}
 
       {/* Navigation Header */}
-      <Navigation isMusicPlaying={isPlayingMusic} toggleMusic={toggleMusic} />
+      <Navigation isMusicPlaying={isPlayingMusic} toggleMusic={toggleMusic} showMusicButton={showMusicPlayer} />
 
       {/* Main Chapters */}
       <main className="relative z-10 space-y-12">
-        <BirthdayHero onPlayMusic={() => setIsPlayingMusic(true)} />
+        <BirthdayHero onPlayMusic={() => setIsPlayingMusic(true)} showMusicButton={showMusicPlayer} />
         <MemoryGallery />
         <Timeline />
         <Reasons />
@@ -50,8 +55,10 @@ export const BirthdayPage = () => {
         <FinalSurprise />
       </main>
 
-      {/* Persistent Floating Music Player */}
-      <MusicPlayer isPlaying={isPlayingMusic} setIsPlaying={setIsPlayingMusic} />
+      {/* Persistent Floating Music Player (Hidden for now) */}
+      {showMusicPlayer && (
+        <MusicPlayer isPlaying={isPlayingMusic} setIsPlaying={setIsPlayingMusic} />
+      )}
 
       {/* Footer */}
       <footer className="py-12 border-t border-white/5 text-center text-xs text-[#fce8ec]/50 font-sans-clean relative z-10 space-y-2">
@@ -61,4 +68,3 @@ export const BirthdayPage = () => {
     </div>
   );
 };
-

@@ -4,7 +4,7 @@ import { Heart, Music, Sparkles } from 'lucide-react';
 import { birthdayConfig } from '../config/birthdayConfig';
 import { getPlaceholderSvg } from '../utils/imageUtils';
 
-export const BirthdayHero = ({ onPlayMusic }) => {
+export const BirthdayHero = ({ onPlayMusic, showMusicButton = true }) => {
   const [imgSrc, setImgSrc] = useState(birthdayConfig.heroPortrait);
   const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -39,13 +39,15 @@ export const BirthdayHero = ({ onPlayMusic }) => {
           </p>
 
           <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <button
-              onClick={onPlayMusic}
-              className="px-7 py-3.5 rounded-full glass-panel-gold border border-[#e6c594]/60 text-[#fff2d6] font-medium text-sm flex items-center gap-3 hover:scale-105 transition-all shadow-[0_0_25px_rgba(230,197,148,0.25)] active:scale-95"
-            >
-              <Music className="w-4 h-4 text-[#e6c594]" />
-              <span>Play Our Romantic Track 🎵</span>
-            </button>
+            {showMusicButton && (
+              <button
+                onClick={onPlayMusic}
+                className="px-7 py-3.5 rounded-full glass-panel-gold border border-[#e6c594]/60 text-[#fff2d6] font-medium text-sm flex items-center gap-3 hover:scale-105 transition-all shadow-[0_0_25px_rgba(230,197,148,0.25)] active:scale-95"
+              >
+                <Music className="w-4 h-4 text-[#e6c594]" />
+                <span>Play Our Romantic Track 🎵</span>
+              </button>
+            )}
 
             <a
               href="#story"

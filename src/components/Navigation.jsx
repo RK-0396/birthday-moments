@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Heart, Music, Menu, X, Sparkles } from 'lucide-react';
 import { birthdayConfig } from '../config/birthdayConfig';
 
-export const Navigation = ({ isMusicPlaying, toggleMusic }) => {
+export const Navigation = ({ isMusicPlaying, toggleMusic, showMusicButton = true }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -66,14 +66,16 @@ export const Navigation = ({ isMusicPlaying, toggleMusic }) => {
 
         {/* Right side controls (Music Toggle & Mobile Menu Toggle) */}
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggleMusic}
-            aria-label="Toggle Music"
-            className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-[#4a121a]/60 hover:bg-[#4a121a] border border-[#e6c594]/40 text-[#fff2d6] transition-all active:scale-95"
-          >
-            <Music className={`w-3.5 h-3.5 ${isMusicPlaying ? 'animate-bounce text-[#e6c594]' : 'text-gray-400'}`} />
-            <span className="hidden sm:inline text-[11px] font-medium">{isMusicPlaying ? 'Playing ♪' : 'Music'}</span>
-          </button>
+          {showMusicButton && (
+            <button
+              onClick={toggleMusic}
+              aria-label="Toggle Music"
+              className="flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-[#4a121a]/60 hover:bg-[#4a121a] border border-[#e6c594]/40 text-[#fff2d6] transition-all active:scale-95"
+            >
+              <Music className={`w-3.5 h-3.5 ${isMusicPlaying ? 'animate-bounce text-[#e6c594]' : 'text-gray-400'}`} />
+              <span className="hidden sm:inline text-[11px] font-medium">{isMusicPlaying ? 'Playing ♪' : 'Music'}</span>
+            </button>
+          )}
 
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
