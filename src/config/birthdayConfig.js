@@ -2,8 +2,7 @@
  * ====================================================================
  * BIRTHDAY CONFIGURATION - OUR LITTLE LOVE STORY ❤️
  * ====================================================================
- * Customize this file to personalize the entire website experience!
- * All photos are dynamically mapped from /public/images/ with zero duplicates!
+ * All texts, dates, milestones, reasons, and interactive heart word messages!
  */
 
 export const birthdayConfig = {
@@ -84,7 +83,7 @@ export const birthdayConfig = {
   ],
 
   // ------------------------------------------------------------------
-  // 2. OUR STORY (Timeline Milestones - Expanded & Unique)
+  // 2. OUR STORY (Timeline Milestones)
   // ------------------------------------------------------------------
   storyMilestones: [
     {
@@ -180,13 +179,28 @@ export const birthdayConfig = {
   ],
 
   // ------------------------------------------------------------------
-  // 4. LOVE GRAPH / HEART PARTICLES
+  // 4. LOVE GRAPH / HEART PARTICLES & INTERACTIVE MESSAGES
   // ------------------------------------------------------------------
   loveWords: [
     "Trust", "Laughter", "Memories", "Comfort", 
     "Adventure", "Love", "Forever", "Joy", 
     "Peace", "Warmth", "Softness", "My Home"
   ],
+
+  loveWordMessages: {
+    "Trust": "With you, I never have to hide a single thought. You are my safest place in this whole world.",
+    "Laughter": "Your laugh is literally my favorite sound in the universe. I want to spend a lifetime making you smile.",
+    "Memories": "Every moment spent with you becomes a treasure I replay in my head over and over again.",
+    "Comfort": "Being next to you feels like coming home after a long, tiring day.",
+    "Adventure": "Even a simple walk or a quiet coffee date feels like an unforgettable journey with you.",
+    "Love": "My love for you grows deeper with every passing sunrise.",
+    "Forever": "I don't just want moments with you — I want all of my tomorrows.",
+    "Joy": "You bring pure, unfiltered happiness into my life.",
+    "Peace": "In a noisy world, you are my calm and my quiet peace.",
+    "Warmth": "Your kindness and hugs make even the coldest days feel warm.",
+    "Softness": "Your gentle touch and sweet care make my heart melt every single time.",
+    "My Home": "Wherever you are in this world, that is where my heart belongs."
+  },
 
   // ------------------------------------------------------------------
   // 5. ROMANTIC LOVE LETTER
