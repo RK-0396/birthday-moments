@@ -199,7 +199,8 @@ export const birthdayConfig = {
     "Peace": "In a noisy world, you are my calm and my quiet peace.",
     "Warmth": "Your kindness and hugs make even the coldest days feel warm.",
     "Softness": "Your gentle touch and sweet care make my heart melt every single time.",
-    "My Home": "Wherever you are in this world, that is where my heart belongs."
+    "My Home": "Wherever you are in this world, that is where my heart belongs.",
+    "Same to you! 😜": "Whenever I tell you how much I love you, you always laugh and say 'Same to you!' 😜 Well, same to you infinitely! ❤️"
   },
 
   // ------------------------------------------------------------------

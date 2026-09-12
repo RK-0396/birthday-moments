@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Heart, X } from 'lucide-react';
+import { Sparkles, Heart, X, Smile } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { birthdayConfig } from '../config/birthdayConfig';
 
@@ -8,18 +8,37 @@ export const LoveGraph = () => {
   const canvasRef = useRef(null);
   const [selectedWord, setSelectedWord] = useState(null);
 
-  const loveWords = birthdayConfig.loveWords;
   const wordMessages = birthdayConfig.loveWordMessages || {};
 
-  const handleWordClick = (word) => {
+  // Words arranged around the outer boundary of the heart with clean distance & spacing
+  const outerWords = [
+    { word: "Trust", position: "top-[6%] left-[6%] sm:left-[10%]" },
+    { word: "Laughter", position: "top-[4%] left-[26%] sm:left-[28%]" },
+    { word: "Memories", position: "top-[4%] right-[26%] sm:right-[28%]" },
+    { word: "Joy", position: "top-[6%] right-[6%] sm:right-[10%]" },
+
+    { word: "Comfort", position: "top-[26%] left-[2%] sm:left-[5%]" },
+    { word: "Adventure", position: "top-[26%] right-[2%] sm:right-[5%]" },
+
+    { word: "Love", position: "top-[50%] left-[2%] sm:left-[6%]" },
+    { word: "Forever", position: "top-[50%] right-[2%] sm:right-[6%]" },
+
+    { word: "Peace", position: "bottom-[22%] left-[6%] sm:left-[12%]" },
+    { word: "Warmth", position: "bottom-[22%] right-[6%] sm:right-[12%]" },
+
+    { word: "Softness", position: "bottom-[5%] left-[22%] sm:left-[28%]" },
+    { word: "My Home", position: "bottom-[5%] right-[22%] sm:right-[28%]" },
+  ];
+
+  const handleWordClick = (word, isFunny = false) => {
     setSelectedWord(word);
     
-    // Heart confetti burst on word click
+    // Confetti burst on word click
     confetti({
-      particleCount: 25,
-      spread: 50,
-      origin: { y: 0.6 },
-      colors: ['#f4a5b7', '#e6c594', '#ffffff']
+      particleCount: isFunny ? 45 : 25,
+      spread: isFunny ? 80 : 50,
+      origin: { y: 0.55 },
+      colors: isFunny ? ['#ff4d6d', '#e6c594', '#ffd166', '#ffffff'] : ['#f4a5b7', '#e6c594', '#ffffff']
     });
   };
 
@@ -30,19 +49,19 @@ export const LoveGraph = () => {
 
     let animationFrameId;
     let width = (canvas.width = canvas.parentElement.clientWidth);
-    let height = (canvas.height = 480);
+    let height = (canvas.height = 520);
 
     const handleResize = () => {
       if (!canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.clientWidth;
-      height = canvas.height = 480;
+      height = canvas.height = 520;
     };
 
     window.addEventListener('resize', handleResize);
 
     // Parametric heart formula points generator
     const heartPoints = [];
-    const totalParticles = 180;
+    const totalParticles = 200;
 
     for (let i = 0; i < totalParticles; i++) {
       const t = (Math.PI * 2 * i) / totalParticles;
@@ -93,11 +112,12 @@ export const LoveGraph = () => {
 
       const centerX = width / 2;
       const centerY = height / 2 - 10;
-      const scale = Math.min(width, height) / 36;
+      // Scaled slightly smaller (div by 42 instead of 36) so pills around the heart have generous spacing!
+      const scale = Math.min(width, height) / 42;
 
       // Draw faint connections
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(244, 165, 183, 0.08)';
+      ctx.strokeStyle = 'rgba(244, 165, 183, 0.09)';
       ctx.lineWidth = 1;
 
       heartPoints.forEach((pt, idx) => {
@@ -144,6 +164,7 @@ export const LoveGraph = () => {
 
   return (
     <section className="py-24 px-6 relative max-w-5xl mx-auto overflow-hidden">
+      {/* Header */}
       <div className="text-center space-y-4 mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -172,34 +193,49 @@ export const LoveGraph = () => {
           transition={{ delay: 0.2 }}
           className="font-handwriting text-2xl text-[#f4a5b7]"
         >
-          Tap any word to reveal a secret note from my heart.
+          Tap any word around or inside the heart to reveal a special note!
         </motion.p>
       </div>
 
       {/* Interactive Heart Canvas Container */}
-      <div className="relative glass-panel rounded-3xl border border-[#e6c594]/30 overflow-hidden p-4 shadow-2xl flex flex-col items-center justify-center">
-        <canvas ref={canvasRef} className="w-full h-[480px] cursor-pointer" />
+      <div className="relative glass-panel rounded-3xl border border-[#e6c594]/30 overflow-hidden p-4 shadow-2xl flex flex-col items-center justify-center min-h-[520px]">
+        <canvas ref={canvasRef} className="w-full h-[520px] cursor-pointer" />
 
-        {/* Floating Interactive Word Badges around/inside canvas */}
-        <div className="absolute inset-0 pointer-events-none flex flex-wrap items-center justify-center gap-3 p-8">
-          {loveWords.map((word, index) => (
+        {/* 1. Words Positioned Around the Outer Boundary of the Heart */}
+        <div className="absolute inset-0 pointer-events-none">
+          {outerWords.map((item, index) => (
             <motion.button
-              key={word}
+              key={item.word}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.06 }}
-              onClick={() => handleWordClick(word)}
-              className={`pointer-events-auto cursor-pointer px-4 py-1.5 rounded-full border text-xs font-serif-luxury transition-all shadow-lg active:scale-95 ${
-                selectedWord === word
+              transition={{ delay: index * 0.05 }}
+              onClick={() => handleWordClick(item.word)}
+              className={`absolute ${item.position} pointer-events-auto cursor-pointer px-3.5 py-1.5 rounded-full border text-xs font-serif-luxury transition-all shadow-lg active:scale-95 ${
+                selectedWord === item.word
                   ? 'bg-[#4a121a] border-[#e6c594] text-[#fff2d6] scale-110 shadow-[0_0_20px_rgba(230,197,148,0.5)]'
                   : 'glass-panel-gold border-[#e6c594]/40 text-[#fff2d6] hover:scale-110 hover:border-[#e6c594]'
               }`}
             >
-              {word}
+              {item.word}
             </motion.button>
           ))}
         </div>
+
+        {/* 2. Special Funny Pill Positioned Right INSIDE the Heart Center */}
+        <motion.button
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          onClick={() => handleWordClick("Same to you! 😜", true)}
+          className={`absolute top-[44%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto cursor-pointer px-5 py-2.5 rounded-full border-2 text-xs font-serif-luxury font-bold transition-all shadow-2xl active:scale-95 animate-pulse ${
+            selectedWord === "Same to you! 😜"
+              ? 'bg-[#ff4d6d] border-[#fff2d6] text-white scale-115 shadow-[0_0_30px_rgba(255,77,109,0.8)]'
+              : 'bg-gradient-to-r from-[#4a121a] via-[#6b1f2d] to-[#4a121a] border-[#e6c594] text-[#fff2d6] hover:scale-110 shadow-[0_0_25px_rgba(230,197,148,0.4)]'
+          }`}
+        >
+          <span>Same to you! 😜</span>
+        </motion.button>
 
         {/* Interactive Word Note Modal Card */}
         <AnimatePresence>
@@ -209,7 +245,7 @@ export const LoveGraph = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="absolute z-30 inset-x-6 sm:inset-x-auto max-w-md mx-auto p-6 rounded-3xl glass-panel-gold border border-[#e6c594] shadow-[0_15px_50px_rgba(0,0,0,0.8)] text-center space-y-4"
+              className="absolute z-30 inset-x-6 sm:inset-x-auto max-w-md mx-auto p-6 rounded-3xl glass-panel-gold border border-[#e6c594] shadow-[0_15px_50px_rgba(0,0,0,0.9)] text-center space-y-4"
             >
               <button
                 onClick={() => setSelectedWord(null)}
@@ -219,22 +255,26 @@ export const LoveGraph = () => {
                 <X className="w-4 h-4" />
               </button>
 
-              <div className="w-10 h-10 rounded-full bg-[#4a121a] border border-[#e6c594] flex items-center justify-center mx-auto shadow-md">
-                <Heart className="w-5 h-5 text-[#f4a5b7] fill-[#f4a5b7] animate-heart-beat" />
+              <div className="w-12 h-12 rounded-full bg-[#4a121a] border border-[#e6c594] flex items-center justify-center mx-auto shadow-md">
+                {selectedWord.includes('😜') ? (
+                  <Smile className="w-6 h-6 text-[#ffd166]" />
+                ) : (
+                  <Heart className="w-6 h-6 text-[#f4a5b7] fill-[#f4a5b7] animate-heart-beat" />
+                )}
               </div>
 
               <div>
                 <h3 className="font-serif-luxury text-2xl font-bold gold-gradient-text">
-                  {selectedWord} ❤️
+                  {selectedWord}
                 </h3>
                 <p className="font-sans-clean text-sm text-[#fce8ec] mt-2 leading-relaxed font-normal">
-                  "{wordMessages[selectedWord] || `You bring endless ${selectedWord.toLowerCase()} into my life every single day.`}"
+                  "{wordMessages[selectedWord] || `You bring endless magic into my life every single day.`}"
                 </p>
               </div>
 
               <button
                 onClick={() => setSelectedWord(null)}
-                className="px-5 py-2 rounded-full glass-panel border border-[#e6c594]/50 text-[#fff2d6] text-xs font-mono uppercase tracking-wider hover:border-[#e6c594] transition-colors"
+                className="px-6 py-2 rounded-full glass-panel border border-[#e6c594]/50 text-[#fff2d6] text-xs font-mono uppercase tracking-wider hover:border-[#e6c594] transition-colors"
               >
                 Close Note ✨
               </button>
