@@ -49,7 +49,7 @@ export const MemoryGallery = () => {
           transition={{ delay: 0.1 }}
           className="font-serif-luxury text-4xl sm:text-5xl text-[#fff2d6]"
         >
-          Her Beautiful Memories
+          Beautiful Memories
         </motion.h2>
 
         <motion.p
