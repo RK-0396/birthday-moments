@@ -86,6 +86,13 @@ export const birthdayConfig = {
       date: "Precious Moments",
       title: "Forever Smiling",
       caption: "Every single day with you is my favorite memory in the making."
+    },
+    {
+      id: 10,
+      image: "/images/memory-10.jpg",
+      date: "Infinite Love",
+      title: "My Whole World",
+      caption: "You are the sweetest part of my life, today and for all my tomorrows."
     }
   ],
 
