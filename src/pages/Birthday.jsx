@@ -11,20 +11,15 @@ import { PhotoCollage } from '../components/PhotoCollage';
 import { LoveLetter } from '../components/LoveLetter';
 import { ILoveYouSequence } from '../components/ILoveYouSequence';
 import { FinalSurprise } from '../components/FinalSurprise';
-import { MusicPlayer } from '../components/MusicPlayer';
+import { SingleAudioPlayer } from '../components/SingleAudioPlayer';
 
 export const BirthdayPage = () => {
   const [showOpening, setShowOpening] = useState(true);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
-  
-  // Set to true whenever you want to show the music player again!
-  const showMusicPlayer = false;
 
   const handleStartExperience = () => {
     setShowOpening(false);
-    if (showMusicPlayer) {
-      setIsPlayingMusic(true);
-    }
+    setIsPlayingMusic(true); // Plays automatically when opening surprise!
   };
 
   const toggleMusic = () => {
@@ -40,11 +35,11 @@ export const BirthdayPage = () => {
       {showOpening && <OpeningSurprise onOpen={handleStartExperience} />}
 
       {/* Navigation Header */}
-      <Navigation isMusicPlaying={isPlayingMusic} toggleMusic={toggleMusic} showMusicButton={showMusicPlayer} />
+      <Navigation isMusicPlaying={isPlayingMusic} toggleMusic={toggleMusic} showMusicButton={true} />
 
       {/* Main Chapters */}
       <main className="relative z-10 space-y-12">
-        <BirthdayHero onPlayMusic={() => setIsPlayingMusic(true)} showMusicButton={showMusicPlayer} />
+        <BirthdayHero onPlayMusic={toggleMusic} showMusicButton={true} isPlaying={isPlayingMusic} />
         <MemoryGallery />
         <Timeline />
         <Reasons />
@@ -55,10 +50,8 @@ export const BirthdayPage = () => {
         <FinalSurprise />
       </main>
 
-      {/* Persistent Floating Music Player (Hidden for now) */}
-      {showMusicPlayer && (
-        <MusicPlayer isPlaying={isPlayingMusic} setIsPlaying={setIsPlayingMusic} />
-      )}
+      {/* Single Dedicated Audio Player & Control Pill */}
+      <SingleAudioPlayer isPlaying={isPlayingMusic} setIsPlaying={setIsPlayingMusic} />
 
       {/* Footer */}
       <footer className="py-12 border-t border-white/5 text-center text-xs text-[#fce8ec]/50 font-sans-clean relative z-10 space-y-2">
