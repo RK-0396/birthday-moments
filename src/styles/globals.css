@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@import "./animations.css";
+
+@layer base {
+  :root {
+    --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+    --font-handwriting: 'Alex Brush', cursive;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    color-scheme: dark;
+  }
+}
+
+.font-serif-luxury {
+  font-family: var(--font-serif);
+}
+
+.font-handwriting {
+  font-family: var(--font-handwriting);
+}
+
+.font-sans-clean {
+  font-family: var(--font-sans);
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(43, 9, 16, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(230, 197, 148, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-gold {
+  background: rgba(30, 8, 14, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(230, 197, 148, 0.35);
+  box-shadow: 0 10px 40px 0 rgba(230, 197, 148, 0.12);
+}
+
+.glass-card {
+  background: rgba(253, 242, 244, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(253, 242, 244, 0.12);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(253, 242, 244, 0.08);
+  border-color: rgba(230, 197, 148, 0.35);
+  box-shadow: 0 12px 30px rgba(230, 197, 148, 0.15);
+}
+
+/* Text Gradients */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fff2d6 0%, #e6c594 50%, #c49a56 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.rose-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #fce8ec 40%, #f4a5b7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0408;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(230, 197, 148, 0.25);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(230, 197, 148, 0.5);
+}
+
