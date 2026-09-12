@@ -79,7 +79,7 @@ export const BirthdayHero = ({ onPlayMusic, showMusicButton = true, isPlaying = 
                   alt={birthdayConfig.girlfriendName}
                   onError={() => setImgSrc(getPlaceholderSvg(birthdayConfig.girlfriendName, "portrait"))}
                   onLoad={() => setImgLoaded(true)}
-                  className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 ${
+                  className={`w-full h-full object-cover object-top transition-all duration-1000 group-hover:scale-105 ${
                     imgLoaded ? 'opacity-100 filter brightness-[1.02]' : 'opacity-80'
                   }`}
                 />

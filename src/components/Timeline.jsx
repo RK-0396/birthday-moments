@@ -89,12 +89,12 @@ export const Timeline = () => {
 
                     {/* Milestone Image */}
                     {item.image && (
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-[#1a060a] border border-white/10 mt-3">
+                      <div className="relative rounded-2xl overflow-hidden bg-[#1f070c] border border-[#e6c594]/30 mt-4 flex items-center justify-center p-1 shadow-inner">
                         <img
                           src={failedImages[item.id] ? getPlaceholderSvg(item.title, "story") : item.image}
                           alt={item.title}
                           onError={() => setFailedImages(prev => ({ ...prev, [item.id]: true }))}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-auto max-h-[460px] object-contain rounded-xl transition-transform duration-700 group-hover:scale-[1.02]"
                         />
                       </div>
                     )}

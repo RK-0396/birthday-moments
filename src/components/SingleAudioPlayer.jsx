@@ -72,3 +72,4 @@ export const SingleAudioPlayer = ({ isPlaying, setIsPlaying }) => {
     </>
   );
 };
+
